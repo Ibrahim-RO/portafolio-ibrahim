@@ -2,10 +2,19 @@
 import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
 import About from "../components/home/About.astro";
-
-
+import Hero from "../components/home/Hero.astro";
+import Card from "../components/ui/Card.astro";
 ---
+
 <Layout>
-	<h1 class="">Hola mundo</h1>
-	<About />
+	<Hero />
+	<div class="bg-background text-white py-10">
+		<About />
+
+		<div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+			<Card />
+			<Card />
+			<Card />
+		</div>
+	</div>
 </Layout>
