@@ -4,7 +4,7 @@ import { z } from "astro/zod"
 export const projectSchema = z.object({
     title: z.string(),
     description: z.string(),
-    github: z.string(),
+    github: z.string().optional(),
     image: z.string(),
     preview: z.string().optional(),
     technologies: z.array(z.string())
