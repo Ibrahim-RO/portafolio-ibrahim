@@ -25,6 +25,7 @@ export type Technology = z.infer<typeof technologySchema>;
 export const contactSchema = z.object({
     name: z.string(),
     description: z.string(),
+    href: z.string(),
     image: z.string()
 }) 
 

@@ -1,23 +1,5 @@
 import { useState } from "react";
 
-// ─── Palette tokens (match your portfolio's dark+cyan aesthetic) ──────────────
-// These CSS variables should live in your global stylesheet or layout root.
-// If you're using Tailwind, you can also define them in tailwind.config.ts as
-// custom colors and reference them with arbitrary values like bg-[var(--cyan)].
-//
-// :root {
-//   --cyan:          #00e5ff;
-//   --cyan-dim:      rgba(0, 229, 255, 0.12);
-//   --cyan-border:   rgba(0, 229, 255, 0.25);
-//   --bg-card:       rgba(255, 255, 255, 0.04);
-//   --bg-card-open:  rgba(255, 255, 255, 0.03);
-//   --border-subtle: rgba(255, 255, 255, 0.08);
-//   --text-primary:  #f0f4f8;
-//   --text-muted:    #7a8a9a;
-//   --text-dim:      #4a5a6a;
-// }
-// ─────────────────────────────────────────────────────────────────────────────
-
 type EntryType = "work" | "project" | "freelance";
 
 interface Stat {
@@ -31,20 +13,19 @@ interface Link {
 }
 
 interface Entry {
-    type: EntryType;
+    id: number;
+    type: string;
     period: string;
     title: string;
     company: string;
     description?: string;
     highlights?: string[];
-    stack?: string[];
-    stats?: Stat[];
-    links?: Link[];
+    stack?: string[];    
 }
 
 // Per-type visual config
 const typeConfig: Record<
-    EntryType,
+    string,
     {
         label: string;
         labelClass: string;
@@ -89,21 +70,19 @@ export default function EntryCard({ entry }: { entry: Entry }) {
         <div
             className={`
                 mb-3 rounded-md overflow-hidden
-                bg-[var(--bg-card)]
+                bg-(--bg-card)
                 border transition-colors duration-200
                 ${open
-                    ? "border-[var(--cyan-border)]"
-                    : "border-[var(--border-subtle)] hover:border-[var(--cyan-border)]"
+                    ? "border-(--cyan-border)"
+                    : "border-(--border-subtle) hover:border-(--cyan-border)"
                 }
             `}
         >
-            {/* ── Header ─────────────────────────────────────────────────── */}
             <div
-                className="flex items-center justify-between px-5 py-[18px] cursor-pointer select-none"
+                className="flex items-center justify-between px-5 py-4.5 cursor-pointer select-none"
                 onClick={() => setOpen(!open)}
             >
                 <div>
-                    {/* Label + period */}
                     <div className="flex items-center gap-2 mb-2">
                         <span
                             className={`
@@ -113,20 +92,19 @@ export default function EntryCard({ entry }: { entry: Entry }) {
                         >
                             {cfg.label}
                         </span>
-                        <span className="text-[11px] tracking-wide text-[var(--text-dim)] tabular-nums">
+                        <span className="text-[11px] tracking-wide tabular-nums">
                             {entry.period}
                         </span>
                     </div>
 
-                    <h3 className="text-[15px] font-semibold text-[var(--text-primary)] mb-0.5">
+                    <h3 className="font-semibold text-(--text-primary) mb-0.5">
                         {entry.title}
                     </h3>
-                    <p className="text-[12px] text-[var(--text-muted)]">
+                    <p className="text-sm">
                         {entry.company}
                     </p>
                 </div>
 
-                {/* Toggle button */}
                 <button
                     type="button"
                     onClick={(e) => {
@@ -134,9 +112,9 @@ export default function EntryCard({ entry }: { entry: Entry }) {
                         setOpen(!open);
                     }}
                     className="
-                        w-7 h-7 flex-shrink-0 rounded
-                        bg-[var(--cyan-dim)] border border-[var(--cyan-border)]
-                        text-[var(--cyan)] text-lg font-light
+                        w-7 h-7 shrink-0 rounded
+                        bg-(--cyan-dim) border border-(--cyan-border)
+                        text-(--cyan) text-lg font-light
                         flex items-center justify-center
                         hover:bg-[rgba(0,229,255,0.2)] transition-colors duration-150
                     "
@@ -146,27 +124,23 @@ export default function EntryCard({ entry }: { entry: Entry }) {
                 </button>
             </div>
 
-            {/* ── Body ───────────────────────────────────────────────────── */}
             {open && (
-                <div className="border-t border-[var(--border-subtle)] px-5 py-[18px] bg-[var(--bg-card-open)]">
-
-                    {/* Description */}
+                <div className="border-t border-(--border-subtle) px-5 py-4.5 bg-(--bg-card-open)">
                     {entry.description && (
-                        <p className="text-[13px] leading-relaxed text-[var(--text-muted)] mb-5">
+                        <p className="text-sm leading-relaxed mb-5">
                             {entry.description}
                         </p>
                     )}
 
-                    {/* Highlights */}
                     {entry.highlights && entry.highlights.length > 0 && (
                         <Section title="Puntos destacados">
                             <ul className="flex flex-col gap-1.5">
                                 {entry.highlights.map((item, i) => (
                                     <li
                                         key={i}
-                                        className="text-[13px] text-[var(--text-muted)] pl-4 relative"
+                                        className="text-sm pl-4 relative"
                                     >
-                                        <span className="absolute left-0 top-[3px] text-[10px] text-[var(--cyan)]">
+                                        <span className="absolute left-0 top-0.75 text-[10px] text-(--cyan)">
                                             ▸
                                         </span>
                                         {item}
@@ -176,7 +150,6 @@ export default function EntryCard({ entry }: { entry: Entry }) {
                         </Section>
                     )}
 
-                    {/* Stack */}
                     {entry.stack && entry.stack.length > 0 && (
                         <Section title="Tecnologías">
                             <div className="flex flex-wrap gap-1.5">
@@ -184,7 +157,7 @@ export default function EntryCard({ entry }: { entry: Entry }) {
                                     <span
                                         key={tech}
                                         className={`
-                                            text-[11px] font-medium tracking-wide px-2.5 py-1 rounded-sm
+                                            text-xs font-medium tracking-wide px-2.5 py-1 rounded-sm
                                             ${cfg.tagClass}
                                         `}
                                     >
@@ -193,63 +166,14 @@ export default function EntryCard({ entry }: { entry: Entry }) {
                                 ))}
                             </div>
                         </Section>
-                    )}
-
-                    {/* Stats */}
-                    {entry.stats && entry.stats.length > 0 && (
-                        <Section title="Estadísticas">
-                            <div className="flex flex-wrap gap-2">
-                                {entry.stats.map((stat) => (
-                                    <div
-                                        key={stat.label}
-                                        className="
-                                            border border-[var(--border-subtle)] rounded
-                                            bg-black/20 px-3.5 py-2.5 min-w-[90px]
-                                        "
-                                    >
-                                        <p className={`text-lg font-bold mb-0.5 ${cfg.statValueClass}`}>
-                                            {stat.value}
-                                        </p>
-                                        <p className="text-[11px] text-[var(--text-muted)]">
-                                            {stat.label}
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
-                        </Section>
-                    )}
-
-                    {/* Links */}
-                    {entry.links && entry.links.length > 0 && (
-                        <Section title="Enlaces" last>
-                            <div className="flex flex-wrap gap-2">
-                                {entry.links.map((link) => (
-                                    <a
-                                        key={link.label}
-                                        href={link.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="
-                                            text-[12px] inline-flex items-center gap-1.5
-                                            px-3 py-1.5 rounded-sm
-                                            bg-[var(--cyan-dim)] border border-[var(--cyan-border)]
-                                            text-[var(--cyan)]
-                                            hover:bg-[rgba(0,229,255,0.2)] transition-colors duration-150
-                                        "
-                                    >
-                                        ↗ {link.label}
-                                    </a>
-                                ))}
-                            </div>
-                        </Section>
-                    )}
+                    )}                    
+ 
                 </div>
             )}
         </div>
     );
 }
 
-// ── Small helper: section with divider title ──────────────────────────────────
 function Section({
     title,
     last = false,
@@ -260,12 +184,12 @@ function Section({
     children: React.ReactNode;
 }) {
     return (
-        <div className={last ? "" : "mb-[18px]"}>
+        <div className={last ? "" : "mb-4.5"}>
             <div className="flex items-center gap-3 mb-2.5">
-                <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-[var(--text-dim)] whitespace-nowrap">
+                <span className="font-bold tracking-[0.12em] uppercase whitespace-nowrap">
                     {title}
                 </span>
-                <span className="flex-1 h-px bg-[var(--border-subtle)]" />
+                <span className="flex-1 h-px bg-(--border-subtle)" />
             </div>
             {children}
         </div>

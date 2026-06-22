@@ -1,21 +1,13 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { navigation } from "../../data/navigation";
 
 export default function Header() {
     const [open, setOpen] = useState(false);
 
-    const links = [
-        { name: "Inicio", href: "#inicio" },
-        { name: "Sobre mí", href: "#about" },
-        { name: "Experiencia", href: "#experience" },
-        { name: "Proyectos", href: "#projects" },
-        { name: "Tecnologías", href: "#tech" },
-        { name: "Contacto", href: "#contact" },
-    ];
-
     return (
         <header className="fixed top-0 z-50 w-full border-b border-cyan-500/10 backdrop-blur-xl bg-[#050B0F]/80">
-            <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+            <div className="mx-auto flex justify-between items-center h-20 px-10">
 
                 <a
                     href="#"
@@ -31,7 +23,7 @@ export default function Header() {
                 </a>
 
                 <nav className="hidden lg:flex items-center gap-8">
-                    {links.map((link) => (
+                    {navigation.map((link) => (
                         <a
                             key={link.name}
                             href={link.href}
@@ -44,26 +36,14 @@ export default function Header() {
                     ))}
                 </nav>
 
-                <div className="hidden lg:flex items-center gap-4">                    
+                <div className="hidden lg:flex items-center gap-4">
                     <a
-                        href="#"
-                        className="rounded-full border border-cyan-500/20 p-3 text-slate-300 hover:border-cyan-400 hover:text-cyan-400 transition"
-                    >
-                        {/* <Github size={18} /> */}
-                    </a>
-
-                    <a
-                        href="#"
-                        className="rounded-full border border-cyan-500/20 p-3 text-slate-300 hover:border-cyan-400 hover:text-cyan-400 transition"
-                    >
-                        {/* <Linkedin size={18} /> */}
-                    </a>
-
-                    <a
-                        href="#contact"
+                        href="/CV_Ibrahim-Rodriguez-Olaya.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="bg-cyan-400 px-6 py-3 text-sm font-bold uppercase tracking-[0.25em] text-black transition hover:scale-105"
                     >
-                        Contratar
+                        Curriculum
                     </a>
                 </div>
 
@@ -76,13 +56,12 @@ export default function Header() {
             </div>
 
             <div
-                className={`overflow-hidden transition-all duration-300 lg:hidden ${
-                    open ? "max-h-125" : "max-h-0"
-                }`}
+                className={`overflow-hidden transition-all duration-300 lg:hidden ${open ? "max-h-125" : "max-h-0"
+                    }`}
             >
                 <div className="border-t border-cyan-500/10 bg-[#081118] p-6">
                     <nav className="flex flex-col gap-6">
-                        {links.map((link) => (
+                        {navigation.map((link) => (
                             <a
                                 key={link.name}
                                 href={link.href}
@@ -93,14 +72,16 @@ export default function Header() {
                         ))}
 
                         <a
-                            href="#contact"
+                            href="/CV_Ibrahim-Rodriguez-Olaya.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="mt-4 bg-cyan-400 py-4 text-center font-bold uppercase tracking-[0.25em] text-black"
                         >
-                            Contratar
+                            Curriculum
                         </a>
                     </nav>
                 </div>
             </div>
-        </header>
+        </header >
     );
 }

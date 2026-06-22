@@ -6,12 +6,9 @@ import Title from "../ui/Title.astro";
 ---
 
 <SectionContainer>
-    <div 
-        id="projects"
-        class="space-y-8 scroll-mt-24"
-    >
+    <div id="projects" class="space-y-8 scroll-mt-24">
         <Title title="Mis Proyectos" />
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-stretch">
             {projects.map((project) => <Card project={project} />)}
         </div>
     </div>

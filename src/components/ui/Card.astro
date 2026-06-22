@@ -10,48 +10,77 @@ interface Props {
 const { project } = Astro.props;
 ---
 
-<div class="group relative overflow-hidden border border-cyan-500/20 bg-[#06090f] transition-all duration-500 hover:border-cyan-400/50 hover:shadow-[0_0_40px_rgba(0,255,255,0.08)]">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,255,255,0.08),transparent_60%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+<div
+    class="group relative overflow-hidden flex flex-col h-full border border-cyan-500/20 bg-[#06090f] transition-all duration-500 hover:border-cyan-400/50 hover:shadow-[0_0_40px_rgba(0,255,255,0.08)]"
+>
+    <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,255,255,0.08),transparent_60%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"
+    >
+    </div>
 
     <div class="relative overflow-hidden border-b border-cyan-500/10">
         <Picture
             src={project.image}
-            alt=""
+            alt={project.title}
             width={300}
             height={300}
-            class="h-65 w-full object-cover  transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+            class="h-65 w-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+            formats={["avif", "webp"]}
         />
     </div>
 
-    <div class="space-y-5 p-6 flex flex-col justify-between">
+    <div class="flex flex-col flex-1 gap-5 p-6">
         <div class="space-y-3">
-            <h3 class="text-2xl font-black uppercase tracking-wide text-gray-100 transition-colors duration-300 group-hover:text-cyan-300">{project.title}</h3>
-
-            <p class="text-sm leading-relaxed text-gray-400">{project.description}</p>
+            <h3
+                class="text-2xl font-black uppercase tracking-wide text-gray-100 transition-colors duration-300 group-hover:text-cyan-300"
+            >
+                {project.title}
+            </h3>
+            <p class="text-sm leading-relaxed text-gray-400">
+                {project.description}
+            </p>
         </div>
 
         <div class="flex flex-wrap gap-2">
             {project.technologies.map((item) => <Badge text={item} />)}
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 pt-2">
-            <a
-                href="#"
-                class="group/btn relative overflow-hidden border border-cyan-400 bg-cyan-400 px-5 py-3 text-xs font-bold uppercase tracking-[0.18em] text-black transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.35)] text-center"
-            >
-                <span class="relative z-10">View Project</span>
+        <div class="mt-auto flex justify-center items-center gap-3 pt-2">
+            {
+                project.preview && (
+                    <a
+                        href={project.preview}
+                        class="w-full group/btn relative overflow-hidden border
+                    border-cyan-400 bg-cyan-400 px-5 py-3 text-xs font-bold uppercase
+                    tracking-[0.18em] text-black transition-all duration-300
+                    hover:shadow-[0_0_25px_rgba(34,211,238,0.35)] text-center"
+                        target="_blank"
+                    >
+                        Ver proyecto
+                        <div class="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover/btn:translate-x-0 pointer-events-none"></div>
+                    </a>
+                )
+            }
 
-                <div class="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover/btn:translate-x-0"></div>
-            </a>
+            {
+                project.github && (
+                    <a
+                        href={project.github}
+                        class="w-full border border-cyan-500/30 text-center bg-transparent
+                        px-5 py-3 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300
+                        transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-400/10
+                        hover:text-cyan-200"
+                        target="_blank"
+                    >
+                        GitHub
+                    </a>
+                )
+            }
+        </div>
 
-            <a
-                href="#"
-                class="border border-cyan-500/30 text-center bg-transparent px-5 py-3 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300 transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-200"
-            >
-                Source Code
-            </a>
+        <div
+            class="absolute bottom-0 left-0 h-px w-0 bg-cyan-400 transition-all duration-500 group-hover:w-full pointer-events-none"
+        >
         </div>
     </div>
-
-    <div class="absolute bottom-0 left-0 h-px w-0 bg-cyan-400 transition-all duration-500 group-hover:w-full"></div>
 </div>

@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 import type { Contact } from "../../types";
 import SectionContainer from "../ui/SectionContainer.astro";
 import Title from "../ui/Title.astro";
@@ -7,183 +8,205 @@ const contactInfo: Contact[] = [
     {
         name: "Github",
         description: "Explora mis proyectos",
-        href: "https://github.com/tu-usuario",
-        image: "GitHub.png",
+        href: "https://github.com/Ibrahim-RO",
+        image: "/github.svg",
     },
     {
         name: "LinkedIn",
         description: "Contáctame profesionalmente",
-        href: "https://linkedin.com/in/tu-usuario",
-        image: "LinkedIn.png",
+        href: "https://www.linkedin.com/in/ibrahim-ro/",
+        image: "/linkedin.svg",
     },
     {
         name: "Email",
         description: "Envíame un correo",
-        href: "mailto:tu@email.com",
-        image: "Email.png",
+        href: "mailto:ibra.rodriguez.olaya@gmail.com",
+        image: "/email.svg",
     },
 ];
 ---
 
 <SectionContainer>
-    <Title title="Contacto" />
+    <div id="contact" class="space-y-8 scroll-mt-24">
+        <Title title="Contacto" />
 
-    <div 
-        id="contact"
-        class="flex flex-col lg:flex-row gap-8 lg:gap-12 scroll-mt-24"
-    >
-        <section aria-label="Redes sociales" class="w-full space-y-3">
-            <p class="font-title text-sm uppercase tracking-widest text-(--text-dim) font-semibold mb-4">
-                Mis redes
-            </p>
-
-            {contactInfo.map((contact) => (
-                <a
-                    href={contact.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="
-                        group flex items-center justify-between
-                        bg-white/5 hover:bg-(--cyan-dim)
-                        border border-white/8 hover:border-(--cyan-border)
-                        p-4 rounded-md
-                        transition-colors duration-200
-                        hover:shadow-[0_0_12px_rgba(0,229,255,0.15)]
-                    "
+        <div
+            class="flex flex-col lg:flex-row gap-8 lg:gap-12"
+        >
+            <section aria-label="Redes sociales" class="w-full space-y-3">
+                <p
+                    class="font-title text-sm uppercase tracking-widest font-semibold mb-4"
                 >
-                    <div class="flex items-center gap-4">
-                        <!-- Dot indicator -->
-                        <span class="
+                    Mis redes
+                </p>
+
+                {
+                    contactInfo.map((contact) => (
+                        <a
+                            href={contact.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="
+                        group relative overflow-hidden
+                        flex items-center justify-between
+                        bg-white/5
+                        border border-cyan-500/20
+                        p-4 rounded-md
+                        transition-all duration-500 hover:border-cyan-400/50 hover:shadow-[0_0_40px_rgba(0,255,255,0.08)]
+                    "
+                        >
+                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,255,255,0.08),transparent_60%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
+
+                            <div class="relative flex items-center gap-4">
+                                <span
+                                    class="
                             w-2 h-2 rounded-full bg-(--cyan) shrink-0
                             opacity-50 group-hover:opacity-100 transition-opacity duration-200
-                        " />
-                        <div>
-                            <p class="font-title text-[15px] font-semibold text-(--text-primary)">
-                                {contact.name}
-                            </p>
-                            <p class="text-[12px] text-(--text-muted)">
-                                {contact.description}
-                            </p>
-                        </div>
+                        "
+                                />
+                                <Picture
+                                    src={contact.image}
+                                    alt={contact.name}
+                                    width={300}
+                                    height={300}
+                                    class="size-14"
+                                />
+                                <div>
+                                    <p class="font-title text-[15px] font-semibold text-(--text-primary) transition-colors duration-300 group-hover:text-cyan-300">
+                                        {contact.name}
+                                    </p>
+                                    <p class="text-[12px] text-(--text-muted)">
+                                        {contact.description}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="relative text-(--text-dim) group-hover:text-(--cyan) group-hover:translate-x-0.5 transition-all duration-200"
+                                aria-hidden="true"
+                            >
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+
+                            <div class="absolute bottom-0 left-0 h-px w-0 bg-cyan-400 transition-all duration-500 group-hover:w-full" />
+                        </a>
+                    ))
+                }
+            </section>
+
+            <section
+                aria-label="Formulario de contacto"
+                class="w-full space-y-3"
+            >
+                <p
+                    class="font-title text-sm uppercase tracking-widest font-semibold mb-4"
+                >
+                    Envíame un mensaje
+                </p>
+
+                <form
+                    method="POST"
+                    class="bg-white/5 border border-white/8
+                    p-6 md:p-8 rounded-md space-y-5"
+                >
+                    <div class="space-y-1.5">
+                        <label
+                            for="name"
+                            class="block text-[13px] font-semibold tracking-wide text-(--text-muted) uppercase"
+                        >
+                            Nombre
+                        </label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Tu nombre"
+                            class="w-full bg-white/8 hover:bg-white/10 focus:bg-white/10
+                            border border-white/8 focus:border-(--cyan-border)
+                            text-(--text-primary)
+                            text-[14px] px-3.5 py-2.5 rounded-md
+                            outline-none transition-colors duration-150"
+                        />
                     </div>
 
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="text-(--text-dim) group-hover:text-(--cyan) group-hover:translate-x-0.5 transition-all duration-200"
-                        aria-hidden="true"
+                    <div class="space-y-1.5">
+                        <label
+                            for="email"
+                            class="block text-[13px] font-semibold tracking-wide text-(--text-muted) uppercase"
+                        >
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="tu@email.com"
+                            class="w-full bg-white/8 hover:bg-white/10 focus:bg-white/10
+                            border border-white/8 focus:border-(--cyan-border)
+                            text-(--text-primary)
+                            text-[14px] px-3.5 py-2.5 rounded-md
+                            outline-none transition-colors duration-150"
+                        />
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label
+                            for="message"
+                            class="block text-[13px] font-semibold tracking-wide text-(--text-muted) uppercase"
+                        >
+                            Mensaje
+                        </label>
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows={4}
+                            placeholder="¿En qué puedo ayudarte?"
+                            class="w-full bg-white/8 hover:bg-white/10 focus:bg-white/10
+                            border border-white/8 focus:border-(--cyan-border)
+                            text-(--text-primary)
+                            text-[14px] px-3.5 py-2.5 rounded-md
+                            outline-none resize-none transition-colors duration-150"
+                        ></textarea>
+                    </div>
+
+                    <button
+                        type="submit"
+                        id="submit-btn"
+                        class="w-full group/btn relative overflow-hidden border border-cyan-400 bg-cyan-400 px-5 py-4 text-xs font-bold uppercase tracking-[0.18em] text-black transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.35)] text-center flex items-center justify-center gap-2"
                     >
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                </a>
-            ))}
-        </section>
-
-        <section aria-label="Formulario de contacto" class="w-full space-y-3">
-            <p class="font-title text-sm uppercase tracking-widest text-(--text-dim) font-semibold mb-4">
-                Envíame un mensaje
-            </p>
-
-            <form
-                method="POST"
-                class="
-                    bg-white/5 border border-white/8
-                    p-6 md:p-8 rounded-md space-y-5
-                "
-            >
-                <!-- Nombre -->
-                <div class="space-y-1.5">
-                    <label for="name" class="block text-[13px] font-semibold tracking-wide text-(--text-muted) uppercase">
-                        Nombre
-                    </label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="Tu nombre"
-                        class="
-                            w-full bg-white/8 hover:bg-white/10 focus:bg-white/10
-                            border border-white/8 focus:border-(--cyan-border)
-                            text-(--text-primary) placeholder:text-(--text-dim)
-                            text-[14px] px-3.5 py-2.5 rounded-md
-                            outline-none transition-colors duration-150
-                        "
-                    />
-                </div>
-
-                <!-- Email -->
-                <div class="space-y-1.5">
-                    <label for="email" class="block text-[13px] font-semibold tracking-wide text-(--text-muted) uppercase">
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="tu@email.com"
-                        class="
-                            w-full bg-white/8 hover:bg-white/10 focus:bg-white/10
-                            border border-white/8 focus:border-(--cyan-border)
-                            text-(--text-primary) placeholder:text-(--text-dim)
-                            text-[14px] px-3.5 py-2.5 rounded-md
-                            outline-none transition-colors duration-150
-                        "
-                    />
-                </div>
-
-                <!-- Mensaje -->
-                <div class="space-y-1.5">
-                    <label for="message" class="block text-[13px] font-semibold tracking-wide text-(--text-muted) uppercase">
-                        Mensaje
-                    </label>
-                    <textarea
-                        id="message"
-                        name="message"
-                        rows={4}
-                        placeholder="¿En qué puedo ayudarte?"
-                        class="
-                            w-full bg-white/8 hover:bg-white/10 focus:bg-white/10
-                            border border-white/8 focus:border-(--cyan-border)
-                            text-(--text-primary) placeholder:text-(--text-dim)
-                            text-[14px] px-3.5 py-2.5 rounded-md
-                            outline-none resize-none transition-colors duration-150
-                        "
-                    ></textarea>
-                </div>
-
-                <!-- Submit -->
-                <button
-                    type="submit"
-                    id="submit-btn"
-                    class="w-full group/btn relative overflow-hidden border border-cyan-400 bg-cyan-400 px-5 py-4 text-xs font-bold uppercase tracking-[0.18em] text-black transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.35)] text-center flex items-center justify-center gap-2"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="15"
-                        height="15"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
-                        <path d="M22 2 11 13M22 2 15 22l-4-9-9-4 20-7z" />
-                    </svg>
-                    <span id="btn-label">Enviar mensaje</span>
-                    <div class="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover/btn:translate-x-0"></div>
-                </button>
-            </form>
-        </section>
-
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="15"
+                            height="15"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M22 2 11 13M22 2 15 22l-4-9-9-4 20-7z"
+                            ></path>
+                        </svg>
+                        <span id="btn-label">Enviar mensaje</span>
+                        <div
+                            class="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover/btn:translate-x-0"
+                        >
+                        </div>
+                    </button>
+                </form>
+            </section>
+        </div>
     </div>
 </SectionContainer>
 
