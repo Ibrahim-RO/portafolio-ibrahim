@@ -7,3 +7,16 @@
     --color-ligth: #F8FAFC;
     --color-background: #101415;
 }
+
+:root {
+    scroll-behavior: smooth;
+    --cyan:          #00e5ff;
+    --cyan-dim:      rgba(0, 229, 255, 0.12);
+    --cyan-border:   rgba(0, 229, 255, 0.25);
+    --bg-card:       rgba(255, 255, 255, 0.04);
+    --bg-card-open:  rgba(255, 255, 255, 0.03);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --text-primary:  #f0f4f8;
+    --text-muted:    #7a8a9a;
+    --text-dim:      #4a5a6a;
+}

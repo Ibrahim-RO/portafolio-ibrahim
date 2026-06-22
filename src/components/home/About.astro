@@ -5,24 +5,44 @@ import SectionContainer from "../ui/SectionContainer.astro";
 ---
 
 <SectionContainer>
-    <article class="w-full space-y-5">
-        <p class="text-sm md:text-base">
-            ¡Hola! Soy<span class="text-secondary"> Ibrahim Rodríguez Olaya, desarrollador web</span> con gusto por el código limpio, las interfaces intuitivas y los retos técnicos que hacen pensar.
-        </p>
-        <p class="text-sm md:text-base">
-            Desde que empecé en este mundo, me ha motivado la idea de construir cosas útiles, ya sea una app que resuelve un problema real o una funcionalidad que mejora la experiencia de usuario. Me encanta aprender nuevas tecnologías, refactorizar código y automatizar tareas repetitivas.
-        </p>
-        <p class="text-sm md:text-base">
-            Actualmente estoy buscando proyectos donde pueda seguir creciendo, colaborar en equipo y escribir código que no solo funcione, sino que también se entienda. Me adapto a las necesidades del equipo y me comprometo con los objetivos de trabajo establecidos.
-        </p>
-    </article>
-    <article class="w-full grid place-items-center">
-        <Picture
-            src={LogoIbrahim || ""}
-            alt="Logo IbrahimRO"
-            width={300}
-            height={300}
-            formats={["avif", "webp"]}
-        />
-    </article>
+    <div
+        id="about"
+        aria-label="Sobre mí"
+        class="flex flex-col gap-12 md:flex-row md:items-center scroll-mt-24"
+    >
+        <div class="w-full">
+            <p class="text-sm md:text-base">
+                ¡Hola! Soy<span class="text-secondary">
+                    Ibrahim Rodríguez Olaya, desarrollador web</span
+                > con gusto por el código limpio, las interfaces intuitivas y los
+                retos técnicos que hacen pensar.
+            </p>
+            <p class="text-sm md:text-base">
+                Desde que empecé en este mundo, me ha motivado la idea de
+                construir cosas útiles, ya sea una app que resuelve un problema
+                real o una funcionalidad que mejora la experiencia de usuario.
+                Me encanta aprender nuevas tecnologías, refactorizar código y
+                automatizar tareas repetitivas.
+            </p>
+            <p class="text-sm md:text-base">
+                Actualmente estoy buscando proyectos donde pueda seguir
+                creciendo, colaborar en equipo y escribir código que no solo
+                funcione, sino que también se entienda. Me adapto a las
+                necesidades del equipo y me comprometo con los objetivos de
+                trabajo establecidos.
+            </p>
+        </div>
+
+        <article class="w-full">
+            <Picture
+                src={LogoIbrahim}
+                alt="Foto de Ibrahim Rodríguez Olaya"
+                widths={[200, 300, 400]}
+                sizes="(max-width: 768px) 200px, 300px"
+                formats={["avif", "webp"]}
+                class="rounded-lg"
+                loading="eager"
+            />
+        </article>
+    </div>
 </SectionContainer>

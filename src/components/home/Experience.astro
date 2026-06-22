@@ -1,0 +1,30 @@
+---
+import { experiences } from "../../data/experience";
+import SectionContainer from "../ui/SectionContainer.astro";
+import Title from "../ui/Title.astro";
+import EntryCard from "./EntryCard";
+---
+
+<SectionContainer>
+    <div
+        id="experience"
+        class="space-y-8 scroll-mt-24"
+    >
+        <Title title="Experiencia" />
+
+        <div>
+            <div
+                class="absolute left-1 top-3 bottom-3 w-px bg-zinc-200 dark:bg-zinc-800"
+            >
+            </div>
+
+            <div class="space-y-5">
+                {
+                    experiences.map((entry) => (
+                        <EntryCard client:only="react" entry={entry} />
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</SectionContainer>

@@ -1,4 +1,18 @@
 ---
-
+import { projects } from "../../data/projects";
+import Card from "../ui/Card.astro";
+import SectionContainer from "../ui/SectionContainer.astro";
+import Title from "../ui/Title.astro";
 ---
 
+<SectionContainer>
+    <div 
+        id="projects"
+        class="space-y-8 scroll-mt-24"
+    >
+        <Title title="Mis Proyectos" />
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            {projects.map((project) => <Card project={project} />)}
+        </div>
+    </div>
+</SectionContainer>
