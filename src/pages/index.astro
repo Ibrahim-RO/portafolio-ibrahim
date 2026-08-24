@@ -6,7 +6,7 @@ import Hero from "../components/home/Hero.astro";
 import Stack from "../components/home/Stack.astro";
 import Experience from "../components/home/Experience.astro";
 import Projects from "../components/home/Projects.astro";
-import Contact from "../components/home/Contact.astro";
+import Contact from "../components/home/Contact";
 ---
 
 <Layout>
@@ -16,6 +16,6 @@ import Contact from "../components/home/Contact.astro";
 		<Experience />
 		<Projects />
 		<Stack />
-		<Contact />
+		<Contact client:load />
 	</div>	
 </Layout>
