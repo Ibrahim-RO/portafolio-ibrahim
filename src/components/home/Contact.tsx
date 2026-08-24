@@ -28,7 +28,7 @@ const contactInfo: ContactItem[] = [
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
 
@@ -50,10 +50,25 @@ export default function Contact() {
       return;
     }
 
-    const subject = encodeURIComponent(`Nueva solicitud de ${name}`);
-    const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}`);
-    window.location.href = `mailto:ibra.rodriguez.olaya@gmail.com?subject=${subject}&body=${body}`;
-    setIsSubmitting(false);
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message ?? "No se pudo enviar el mensaje.");
+      }
+
+      notyf.success("Correo enviado correctamente.");
+      form.reset();
+    } catch (error) {
+      notyf.error(error instanceof Error ? error.message : "No se pudo enviar el mensaje.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -101,7 +116,7 @@ export default function Contact() {
 
               <button type="submit" disabled={isSubmitting} className="w-full group/btn relative overflow-hidden border border-cyan-400 bg-cyan-400 px-5 py-4 text-xs font-bold uppercase tracking-[0.18em] text-black transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.35)] disabled:cursor-wait disabled:opacity-70 text-center flex items-center justify-center gap-2">
                 <Send aria-hidden="true" size={15} strokeWidth={2.5} />
-                <span>{isSubmitting ? "Preparando..." : "Enviar mensaje"}</span>
+                <span>{isSubmitting ? "Enviando..." : "Enviar mensaje"}</span>
                 <div className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover/btn:translate-x-0" />
               </button>
             </form>
