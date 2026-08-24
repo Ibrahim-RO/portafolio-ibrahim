@@ -12,15 +12,20 @@ export const technologies = [
     {
         id: 3,
         name: "Database",
-        technologies: ["PostgreSQL", "MySQL", "MongoDB", "SQLite"]
+        technologies: ["PostgreSQL", "MySQL", "SQLServer", "MongoDB", "SQLite"]
     },
     {
         id: 4,
-        name: "Cloud & Devops",
-        technologies: ["Docker", "Render", "Neon", "Vercel"]
+        name: "Mobile",
+        technologies: ["Dart", "Flutter"]
     },
     {
         id: 5,
+        name: "Cloud & Devops",
+        technologies: ["Docker", "AWS", "Render", "Neon", "Vercel"]
+    },
+    {
+        id: 6,
         name: "Herramientas",
         technologies: ["Git & GitHub", "Postman", "VS Code", "Figma (UI/UX)", "n8n"]
     },
