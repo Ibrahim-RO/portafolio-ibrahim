@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { useState, type FormEvent } from "react";
 import { ArrowRight, Send } from "lucide-react";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
